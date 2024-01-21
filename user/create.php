@@ -28,7 +28,7 @@
                             <div class="card-header">
                                 <span class="h6"><i class="fa-solid fa-square-plus"></i> Form Tambah User</span>
 
-                                <button type="submit" name="submit" class="btn btn-sm btn-danger float-end ">
+                                <button type="submit" name="create" class="btn btn-sm btn-danger float-end ">
                                 <i class="fa-solid fa-bread-slice"></i> Simpan Data</button>
 
                                 <a href="<?= $url; ?>user/index.php" name="submit" class="btn btn-primary float-end btn-sm me-1"><i class="fa-solid fa-square-xmark"></i> Kembali</a>

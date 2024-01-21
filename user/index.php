@@ -1,6 +1,7 @@
 <?php 
 
     include_once "../config.php";
+    include_once "function-user.php";
 
     $title = "Data User | Smk Negeri Makassar";
 
@@ -13,6 +14,8 @@
     }else {
         $msg = '';
     }
+
+    $users = index("SELECT * FROM user");
 
 ?>
 
@@ -53,19 +56,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php foreach ($users as $user) :?>
                                         <tr>
                                             <td>1</td>
-                                            <td>syahrul</td>
-                                            <td>siswa</td>
-                                            <td>jln abdesir</td>
+                                            <td><?= $user["username"]; ?></td>
+                                            <td><?= $user["jabatan"]; ?></td>
+                                            <td><?= $user["alamat"]; ?></td>
                                             <td>
-                                                <img src="" alt="ini foto">
+                                                <img style="width: 100px;" src="../asset/img/user/<?= $user["photo"]; ?>" alt="ini foto">
                                             </td>
                                             <td style="margin: auto;">
                                                 <a href="" class="btn btn-warning btn-sm me-1"><i class="fa-solid fa-pen"></i> Edit</a>
                                                 <a href="" class="btn btn-danger btn-sm me-1"><i class="fa-solid fa-trash"></i> Delete</a>
                                             </td>
                                         </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>

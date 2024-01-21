@@ -37,8 +37,22 @@
         
     }
 
-    
-    if (isset($_POST["submit"])) {
+
+    // function index
+    function index($query) {
+        global $koneksi;
+        $result = mysqli_query($koneksi, $query);
+        $rows = [];
+        while ($user = mysqli_fetch_assoc($result)) {
+            $rows[] = $user;
+        }
+
+        return $rows;
+    }
+
+
+    // function create
+    if (isset($_POST["create"])) {
         
         $username = htmlspecialchars($_POST["username"]);
         $nama = htmlspecialchars($_POST["nama"]);
