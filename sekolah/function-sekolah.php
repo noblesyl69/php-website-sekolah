@@ -14,6 +14,18 @@
         return $rows;
     }
 
+    // function edit
+    function edit($query){
+        global $koneksi;
+        $result = mysqli_query($koneksi, $query);
+        $rows = [];
+
+        while ($sekolah = mysqli_fetch_assoc($result)) {
+            $rows[] = $sekolah; 
+        }
+        return $rows;
+    }
+
     // function upload gambar
     function uploadGambar() {
         

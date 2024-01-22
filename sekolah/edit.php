@@ -2,34 +2,41 @@
 
     include_once "../config.php";
 
-    $title = "Create Sekolah | Smk Negeri Makassar";
+    $title = "Edit Sekolah | Smk Negeri Makassar";
 
     include_once "../view/header.php";
     include_once "../view/navbar.php";
     include_once "../view/sidebar.php";
 
-   if (isset($_GET["msg"])) {
-        $msg = $_GET["msg"];
-   }else {
-        $msg = '';
-   }
+    include_once "function-sekolah.php";
+
+    if (isset($_GET["msg"])) {
+            $msg = $_GET["msg"];
+    }else {
+            $msg = '';
+    }
+
+    $id = $_GET["id"];
+    if (isset($_GET["id"])) {
+        $sekolah = edit("SELECT * FROM tb_sekolah WHERE id = $id")[0];
+    }
 
 ?>
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
                     <ol class="mt-4 breadcrumb mb-4">
-                        <li class="breadcrumb-item active"><a href="<?= $url; ?>" class="text-decoration-none"><i class="fa-solid fa-house"></i> Dashboard</a> - <a href="" class="text-decoration-none">Data Sekolah</a> - Form Sekolah</li>
+                        <li class="breadcrumb-item active"><a href="<?= $url; ?>" class="text-decoration-none"><i class="fa-solid fa-house"></i> Dashboard</a> - <a href="" class="text-decoration-none">Data Sekolah</a> - Edit Sekolah</li>
                     </ol>
                     
                     <!-- content -->
                     <div class="card">
-                        <form action="function-sekolah.php" method="post" enctype="multipart/form-data">
+                        <form action="function-sekolah.php?id=<?= $sekolah["id"]; ?>" method="post" enctype="multipart/form-data">
                             <div class="card-header">
-                                <span class="h6"><i class="fa-solid fa-square-plus"></i> Form Tambah Sekolah</span>
+                                <span class="h6"><i class="fa-solid fa-square-plus"></i> Form Update Sekolah</span>
 
                                 <button type="submit" name="create" class="btn btn-sm btn-danger float-end ">
-                                <i class="fa-solid fa-bread-slice"></i> Simpan Data</button>
+                                <i class="fa-solid fa-bread-slice"></i> Update Data</button>
 
                                 <a href="<?= $url; ?>sekolah/index.php" name="submit" class="btn btn-primary float-end btn-sm me-1"><i class="fa-solid fa-square-xmark"></i> Kembali</a>
                             </div>
@@ -46,14 +53,14 @@
                                             <label for="nama" class="col-sm-2 col-form-label">Nama Sekolah</label>
                                             <label for="" class="col-sm-1 col-form-label">:</label>
                                             <div class="col-sm-9" style="margin-left: -46px;">
-                                                <input type="text" class="form-control  border-0 border-bottom" id="nama" name="nama" placeholder="nama sekolah">
+                                                <input type="text" class="form-control  border-0 border-bottom" id="nama" name="nama" placeholder="nama sekolah" value="<?= $sekolah["nama"]; ?>" >
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="email" class="col-sm-2 col-form-label">Email</label>
                                             <label for="" class="col-sm-1 col-form-label">:</label>
                                             <div class="col-sm-9" style="margin-left: -46px;">
-                                                <input type="text" class="form-control  border-0 border-bottom" id="email" name="email" placeholder="email sekolah">
+                                                <input type="text" class="form-control  border-0 border-bottom" id="email" name="email" placeholder="email sekolah" value="<?= $sekolah["email"]; ?>">
                                             </div>
                                         </div>
 
@@ -62,7 +69,8 @@
                                             <label for="" class="col-sm-1 col-form-label">:</label>
                                             <div class="col-sm-9" style="margin-left: -46px;">
                                                 <select class="form-select border-0 border-bottom" aria-label="Default select example" name="akreditasi">
-                                                    <option selected>-- Pilih Akreditasi --</option>
+                                                    <option  value="<?= $sekolah["akreditasi"]; ?>"><?= $sekolah["akreditasi"]; ?></option>
+                                                    <option >-- Pilih Akreditasi --</option>
                                                     <option value="A">A</option>
                                                     <option value="B">B</option>
                                                     <option value="C">C</option>
@@ -75,7 +83,8 @@
                                             <label for="" class="col-sm-1 col-form-label">:</label>
                                             <div class="col-sm-9" style="margin-left: -46px;">
                                                 <select class="form-select border-0 border-bottom" aria-label="Default select example" name="status">
-                                                    <option selected>-- Pilih Status --</option>
+                                                <option  value="<?= $sekolah["status"]; ?>"><?= $sekolah["status"]; ?></option>
+                                                    <option >-- Pilih Status --</option>
                                                     <option value="Negeri">Negeri</option>
                                                     <option value="Swasta">Swasta</option>
                                                 </select>
@@ -86,19 +95,20 @@
                                             <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
                                             <label for="" class="col-sm-1 col-form-label">:</label>
                                             <div class="col-sm-9" style="margin-left: -46px;">
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="alamat sekolah" name="alamat"></textarea>
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="alamat sekolah" name="alamat"><?= $sekolah["alamat"]; ?></textarea>
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
                                             <label for="visimisi" class="col-sm-2 col-form-label">Visi Misi</label>
                                             <label for="" class="col-sm-1 col-form-label">:</label>
                                             <div class="col-sm-9" style="margin-left: -46px;">
-                                                <textarea class="form-control" id="visimisi" rows="3" placeholder="visi misi sekolah" name="visimisi"></textarea>
+                                                <textarea class="form-control" id="visimisi" rows="3" placeholder="visi misi sekolah" name="visimisi"><?= $sekolah["visimisi"]; ?></textarea>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-4 text-center" style="margin-top: 50px;">
-                                        <h5 class=" text-center mb-2">Input Gambar Sekolah</h5>
+                                    <img style="width: 100px; margin-bottom: 20px;" src="../asset/img/sekolah/<?= $sekolah["gambar"]; ?>" alt="ini foto">
+                                        <h5 class=" text-center mb-2">Update Gambar Sekolah</h5>
                                         <input class="form-control fonm-control-sm" type="file" id="formFile" name="gambar">
 
                                         <small class="text-secondary">Pilih photo PNG, JPG atau JPEG dengan ukuran maximal 2 MB</small>
