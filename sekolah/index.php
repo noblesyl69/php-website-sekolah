@@ -42,6 +42,22 @@
                                 </div>
                             <?php endif; ?>
                             <!-- alert end -->
+
+                            <!-- alert delete -->
+                            <?php if ($msg === "success-delete") :?>
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <strong>success</strong> Data Anda Beshasil di delete!
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                
+                            <?php endif; ?>
+                            <?php if($msg === "error-delete") : ?>
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <strong>Error</strong> Data Anda Gagal di delete!
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            <?php endif; ?>
+                            <!-- alert delete end -->
                             <div class="card-body">
                                 <table class="table table-hover mt-4">
                                     <thead>
@@ -67,8 +83,8 @@
                                                 <img style="width: 100px;" src="../asset/img/sekolah/<?= $sekolah["gambar"]; ?>" alt="ini foto">
                                             </td>
                                             <td style="margin: auto;">
-                                                <a href="" class="btn btn-warning btn-sm me-1"><i class="fa-solid fa-pen"></i> Edit</a>
-                                                <a href="" class="btn btn-danger btn-sm me-1"><i class="fa-solid fa-trash"></i> Delete</a>
+                                                <a href="<?= $url; ?>sekolah/edit.php?id=<?= $sekolah['id']; ?>" class="btn btn-warning btn-sm me-1"><i class="fa-solid fa-pen"></i> Edit</a>
+                                                <a href="<?= $url; ?>sekolah/delete.php?id=<?= $sekolah['id']; ?>" class="btn btn-danger btn-sm me-1"><i class="fa-solid fa-trash"></i> Delete</a>
                                             </td>
                                         </tr>
                                         <?php endforeach; ?>
