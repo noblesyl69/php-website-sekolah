@@ -83,5 +83,43 @@
     }
 
 
+    if (isset($_POST["update"])) {
+        
+        $id = $_GET["id"];
+        $nama = htmlspecialchars($_POST["nama"]);
+        $alamat = htmlspecialchars($_POST["alamat"]);
+        $akreditasi = htmlspecialchars($_POST["akreditasi"]);
+        $status = htmlspecialchars($_POST["status"]);
+        $email = htmlspecialchars($_POST["email"]);
+        $visimisi = htmlspecialchars($_POST["visimisi"]);
+
+        // panggil gambar dari data base
+        $queryGambar = "SELECT gambar FROM tb_sekolah WHERE id = $id";
+        $resultGambar = mysqli_query($koneksi, $queryGambar);
+        $gambarData = mysqli_fetch_assoc($resultGambar);
+
+        if ($_FILES["gambar"]["error"] === 4) {
+            $gambar = $gambarData["gambar"];
+        }else {
+            $gambar = uploadGambar();
+        }
+
+        $query = "UPDATE tb_sekolah SET
+                    nama = '$nama',
+                    alamat = '$alamat',
+                    akreditasi = '$akreditasi',
+                    status = '$status',
+                    email = '$email',
+                    visimisi = '$visimisi',
+                    gambar = '$gambar'
+                    WHERE id = $id
+                    ";
+        mysqli_query($koneksi, $query);
+        header("location: index.php?msg=success");
+        return;
+        
+    }
+
+
 
 ?>

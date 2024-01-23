@@ -35,7 +35,7 @@
                             <div class="card-header">
                                 <span class="h6"><i class="fa-solid fa-square-plus"></i> Form Update Sekolah</span>
 
-                                <button type="submit" name="create" class="btn btn-sm btn-danger float-end ">
+                                <button type="submit" name="update" class="btn btn-sm btn-danger float-end ">
                                 <i class="fa-solid fa-bread-slice"></i> Update Data</button>
 
                                 <a href="<?= $url; ?>sekolah/index.php" name="submit" class="btn btn-primary float-end btn-sm me-1"><i class="fa-solid fa-square-xmark"></i> Kembali</a>
@@ -69,12 +69,14 @@
                                             <label for="" class="col-sm-1 col-form-label">:</label>
                                             <div class="col-sm-9" style="margin-left: -46px;">
                                                 <select class="form-select border-0 border-bottom" aria-label="Default select example" name="akreditasi">
-                                                    <option  value="<?= $sekolah["akreditasi"]; ?>"><?= $sekolah["akreditasi"]; ?></option>
-                                                    <option >-- Pilih Akreditasi --</option>
-                                                    <option value="A">A</option>
-                                                    <option value="B">B</option>
-                                                    <option value="C">C</option>
-                                                    <option value="D">D</option>
+                                                    <?php $akreditasi = ["A","B","C","D"] ?>
+                                                    <?php foreach ($akreditasi as $ak) : ?>
+                                                        <?php if ($sekolah["akreditasi"] == $ak):?>
+                                                            <option selected value="<?= $ak; ?>"><?= $ak; ?> </option>
+                                                            <?php else: ?>
+                                                                <option  value="<?= $ak; ?>"><?= $ak; ?> </option>
+                                                        <?php endif; ?>
+                                                    <?php endforeach; ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -83,10 +85,14 @@
                                             <label for="" class="col-sm-1 col-form-label">:</label>
                                             <div class="col-sm-9" style="margin-left: -46px;">
                                                 <select class="form-select border-0 border-bottom" aria-label="Default select example" name="status">
-                                                <option  value="<?= $sekolah["status"]; ?>"><?= $sekolah["status"]; ?></option>
-                                                    <option >-- Pilih Status --</option>
-                                                    <option value="Negeri">Negeri</option>
-                                                    <option value="Swasta">Swasta</option>
+                                                    <?php $status = ["Negeri", "Swasta"] ?>
+                                                    <?php foreach ($status as $stt) :?>
+                                                        <?php if ($sekolah["status"] == $stt) :?>
+                                                            <option selected value="<?= $stt; ?>"><?= $stt; ?> </option>
+                                                        <?php else : ?>
+                                                            <option value="<?= $stt; ?>"><?= $stt; ?> </option>
+                                                        <?php endif; ?>
+                                                    <?php endforeach; ?>
                                                 </select>
                                             </div>
                                         </div>
