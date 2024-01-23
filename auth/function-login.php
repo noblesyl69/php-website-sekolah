@@ -1,6 +1,9 @@
 <?php 
 
+    session_start();
     include_once "../config.php";
+
+  
 
     if (isset($_POST["login"])) {
         
@@ -14,6 +17,11 @@
             $rows = mysqli_fetch_assoc($resulUsername);
             // cek password
             if (password_verify($password, $rows["password"])) {
+
+                // cek session
+                $_SESSION["login"] = true;
+                $_SESSION["id"] = $rows["id"];
+
                 header("location: ../index.php");
                 return;
             }else {

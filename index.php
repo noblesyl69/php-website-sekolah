@@ -2,7 +2,14 @@
 
 <?php 
 
+    session_start();
     include_once "./config.php";
+
+    // cek session
+    if (!isset($_SESSION["login"])) {
+        header("location: auth/login.php");
+        exit;
+    }
 
     $title = "Dasboard | Smk Negeri Makassar";
 

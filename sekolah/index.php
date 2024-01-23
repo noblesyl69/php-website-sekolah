@@ -1,6 +1,13 @@
 <?php 
 
-    include_once "../config.php";
+    session_start();
+    include_once "./config.php";
+
+    // cek session
+    if (!isset($_SESSION["login"])) {
+        header("location: auth/login.php");
+        exit;
+    }
     include_once "function-sekolah.php";
 
     $title = "Data Sekolah | Smk Negeri Makassar";

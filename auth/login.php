@@ -1,8 +1,15 @@
 <?php 
 
+    session_start();
     include_once "../config.php";
 
     $title = "Login";
+
+      // cek session
+    if (isset($_SESSION["login"])) {
+        header("location: ../index.php");
+        exit;
+    }
 
     if (isset($_GET["msg"])) {
         $msg = $_GET["msg"];
