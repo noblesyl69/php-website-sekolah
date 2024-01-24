@@ -1,11 +1,11 @@
 <?php 
 
     session_start();
-    include_once "./config.php";
 
-    // cek session
+    include_once "../config.php";
+
     if (!isset($_SESSION["login"])) {
-        header("location: auth/login.php");
+        header("location: ../auth/login.php");
         exit;
     }
 

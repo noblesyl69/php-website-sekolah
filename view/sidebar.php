@@ -1,3 +1,13 @@
+<?php 
+
+    $idLogin = $_SESSION["id"];
+    $queryUser = mysqli_query($koneksi, "SELECT username FROM user WHERE id = $idLogin");
+    $user = mysqli_fetch_assoc($queryUser);
+
+
+?>
+
+
 <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
@@ -14,6 +24,12 @@
                             Users
                         </a>
 
+                        <a class="nav-link collapsed" href="<?= $url; ?>user/password.php
+                        ">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Ganti password
+                        </a>
+
                         <a class="nav-link collapsed" href="<?= $url; ?>sekolah/index.php
                         ">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
@@ -22,9 +38,9 @@
 
 
                         <div class="sb-sidenav-menu-heading">Data</div>
-                        <a class="nav-link" href="charts.html">
+                        <a class="nav-link" href="<?= $url; ?>siswa/index.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Charts
+                            Siswa
                         </a>
                         <a class="nav-link" href="tables.html">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
@@ -33,8 +49,8 @@
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
-                    <div class="small">Logged in as:</div>
-                    Start Bootstrap
+                    <div class="small">Login Active:</div>
+                    <?= $user["username"]; ?>
                 </div>
             </nav>
         </div>

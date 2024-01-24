@@ -1,13 +1,14 @@
 <?php 
 
     session_start();
-    include_once "./config.php";
 
-    // cek session
+    include_once "../config.php";
+
     if (!isset($_SESSION["login"])) {
-        header("location: auth/login.php");
+        header("location: ../auth/login.php");
         exit;
     }
+
     include_once "function-sekolah.php";
 
     $title = "Data Sekolah | Smk Negeri Makassar";
@@ -66,7 +67,7 @@
                             <?php endif; ?>
                             <!-- alert delete end -->
                             <div class="card-body">
-                                <table class="table table-hover mt-4">
+                                <table class="table table-hover mt-4" id="datatablesSimple">
                                     <thead>
                                         <tr>
                                             <th scope="col">No</th>

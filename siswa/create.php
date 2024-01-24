@@ -9,7 +9,7 @@
         exit;
     }
 
-    $title = "Data User | Smk Negeri Makassar";
+    $title = "Data Siswa | Smk Negeri Makassar";
 
     include_once "../view/header.php";
     include_once "../view/navbar.php";
@@ -21,19 +21,32 @@
         $msg = '';
     }
 
+    $queryNis = mysqli_query($koneksi, "SELECT max(nis) as maxnis FROM tb_siswa");
+    // cek query
+    if ($queryNis) {
+        $data = mysqli_fetch_assoc($queryNis);
+        $maxnis = $data["maxnis"];
+                                                    
+        $noUrut = (int) substr("$maxnis", 3, 3);
+        $noUrut++;
+        $maxnis = "NIS". sprintf("%03s", $noUrut);
+    }else {
+        "query error : ". mysqli_error($koneksi);
+    }
+    
 ?>
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
                     <ol class="mt-4 breadcrumb mb-4">
-                        <li class="breadcrumb-item active"><a href="<?= $url; ?>" class="text-decoration-none"><i class="fa-solid fa-house"></i> Dashboard</a> - <a href="" class="text-decoration-none">Data User</a> - Form User</li>
+                        <li class="breadcrumb-item active"><a href="<?= $url; ?>" class="text-decoration-none"><i class="fa-solid fa-house"></i> Dashboard</a> - <a href="" class="text-decoration-none">Data Siswa</a> - Form Siswa</li>
                     </ol>
                     
                     <!-- content -->
                     <div class="card">
-                        <form action="function-user.php" method="post" enctype="multipart/form-data">
+                        <form action="function-siswa.php" method="post" enctype="multipart/form-data">
                             <div class="card-header">
-                                <span class="h6"><i class="fa-solid fa-square-plus"></i> Form Tambah User</span>
+                                <span class="h6"><i class="fa-solid fa-square-plus"></i> Form Tambah Siswa</span>
 
                                 <button type="submit" name="create" class="btn btn-sm btn-danger float-end ">
                                 <i class="fa-solid fa-bread-slice"></i> Simpan Data</button>
@@ -49,10 +62,10 @@
                                 <div class="row">
                                     <div class="col-8">
                                         <div class="mb-3 row">
-                                            <label for="username" class="col-sm-2 col-form-label">Username</label>
-                                            <label for="" class="col-sm-1 col-form-label">:</label>
+                                            <label for="username" class="col-sm-2 col-form-label">Nis</label>
+                                            <label for="nis" class="col-sm-1 col-form-label">:</label>
                                             <div class="col-sm-9" style="margin-left: -46px;">
-                                                <input type="text" class="form-control  border-0 border-bottom" id="username" name="username">
+                                                <input type="text" class="form-control  border-0 border-bottom" id="nis" name="nis" value="<?= $maxnis; ?>">
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
@@ -62,31 +75,19 @@
                                                 <input type="text" class="form-control  border-0 border-bottom" id="nama" name="nama">
                                             </div>
                                         </div>
-
-                                        <div class="mb-3 row">
-                                            <label for="password" class="col-sm-2 col-form-label">password</label>
-                                            <label for="" class="col-sm-1 col-form-label">:</label>
-                                            <div class="col-sm-9" style="margin-left: -46px;">
-                                                <input type="password" class="form-control  border-0 border-bottom" id="password" name="password">
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="jabatan" class="col-sm-2 col-form-label">Jabatan</label>
-                                            <label for="" class="col-sm-1 col-form-label">:</label>
-                                            <div class="col-sm-9" style="margin-left: -46px;">
-                                                <select class="form-select border-0 border-bottom" aria-label="Default select example" name="jabatan">
-                                                    <option selected>-- Pilih Jabatan --</option>
-                                                    <option value="siswa">siswa</option>
-                                                    <option value="guru">guru</option>
-                                                    <option value="operator">operator</option>
-                                                </select>
-                                            </div>
-                                        </div>
                                         <div class="mb-3 row">
                                             <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
                                             <label for="" class="col-sm-1 col-form-label">:</label>
                                             <div class="col-sm-9" style="margin-left: -46px;">
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Domisili" name="alamat"></textarea>
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Alamat anda ..." name="alamat"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3 row">
+                                            <label for="username" class="col-sm-2 col-form-label">Kilas</label>
+                                            <label for="Kilas" class="col-sm-1 col-form-label">:</label>
+                                            <div class="col-sm-9" style="margin-left: -46px;">
+                                                    <input type="text" class="form-control  border-0 border-bottom" id="Kilas" name="kelas">
                                             </div>
                                         </div>
                                     </div>
