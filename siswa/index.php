@@ -19,6 +19,13 @@
     include_once "function-siswa.php";
     $siswas = index("SELECT * FROM tb_siswa");
 
+    // alert 
+    if (isset($_GET["msg"])) {
+        $msg = $_GET["msg"];
+    }else {
+        $msg = '';
+    }
+
 ?>
 
 <div id="layoutSidenav_content">
@@ -37,7 +44,7 @@
                                 <a href="create.php" name="submit" class="btn btn-primary float-end btn-sm me-1"><i class="fa-solid fa-square-plus"></i> Tambah Siswa</a>
                             </div>
                             <!-- alert  -->
-                           
+                            <?php include_once "alert.php" ?>
                             <!-- alert end -->
                             <div class="card-body">
                                 <table class="table table-hover mt-4" id="datatablesSimple">

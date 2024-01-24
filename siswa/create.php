@@ -51,7 +51,7 @@
                                 <button type="submit" name="create" class="btn btn-sm btn-danger float-end ">
                                 <i class="fa-solid fa-bread-slice"></i> Simpan Data</button>
 
-                                <a href="<?= $url; ?>user/index.php" name="submit" class="btn btn-primary float-end btn-sm me-1"><i class="fa-solid fa-square-xmark"></i> Kembali</a>
+                                <a href="<?= $url; ?>siswa/index.php" name="submit" class="btn btn-primary float-end btn-sm me-1"><i class="fa-solid fa-square-xmark"></i> Kembali</a>
                             </div>
 
                             <!-- alert  -->
@@ -93,7 +93,7 @@
                                     </div>
                                     <div class="col-4 text-center" style="margin-top: 50px;">
                                         <h5 class=" text-center mb-2">Input Foto Anda</h5>
-                                        <input class="form-control fonm-control-sm" type="file" id="formFile" name="photo">
+                                        <input class="form-control fonm-control-sm" type="file" id="formFile" name="photo" accept="image/jpg, image/png,image/jpeg">
 
                                         <small class="text-secondary">Pilih photo PNG, JPG atau JPEG dengan ukuran maximal 2 MB</small>
                                     </div>
