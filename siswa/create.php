@@ -84,10 +84,27 @@
                                         </div>
 
                                         <div class="mb-3 row">
-                                            <label for="username" class="col-sm-2 col-form-label">Kilas</label>
-                                            <label for="Kilas" class="col-sm-1 col-form-label">:</label>
+                                            <label for="kelas" class="col-sm-2 col-form-label">Kelas</label>
+                                            <label for="" class="col-sm-1 col-form-label">:</label>
                                             <div class="col-sm-9" style="margin-left: -46px;">
-                                                    <input type="text" class="form-control  border-0 border-bottom" id="Kilas" name="kelas">
+                                                <select class="form-select border-0 border-bottom" aria-label="Default select example" name="kelas">
+                                                    <option selected>-- Pilih Kelas --</option>
+                                                    <option value="X">X</option>
+                                                    <option value="XI">XI</option>
+                                                    <option value="XII">XII</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label for="jurusan" class="col-sm-2 col-form-label">Jurusan</label>
+                                            <label for="" class="col-sm-1 col-form-label">:</label>
+                                            <div class="col-sm-9" style="margin-left: -46px;">
+                                                <select class="form-select border-0 border-bottom" aria-label="Default select example" name="jurusan">
+                                                    <option selected>-- Pilih Kelas --</option>
+                                                    <option value="tkj">Tkj</option>
+                                                    <option value="multimedia">Multimedia</option>
+                                                    <option value="arsitektur">Arsitektur</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>

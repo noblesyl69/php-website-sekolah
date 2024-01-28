@@ -3,6 +3,12 @@
         <strong>Berhasil!</strong> Data Kamu sudah di simpan
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+<?php elseif ($msg === "successDelete") : ?>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Berhasil!</strong> Data Kamu sudah di hapus
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    </div>
 <?php elseif ($msg === "nisFalid") : ?>
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
         <strong>Gagal!</strong> Nis Kamu sudah ada

@@ -37,7 +37,6 @@
                     
                     <!-- content -->
                     <div class="card">
-                        <form action="" method="post">
                             <div class="card-header mb-2">
                                 <span class="h6"><i class="fa-solid fa-database"></i> Data Siswa</span>
 
@@ -55,6 +54,7 @@
                                             <th scope="col">Nama</th>
                                             <th scope="col">Alamat</th>
                                             <th scope="col">Kelas</th>
+                                            <th scope="col">Jurusan</th>
                                             <th scope="col">Photo</th>
                                             <th scope="col" style="width: 170px;" class="text-center">Action</th>
                                         </tr>
@@ -68,19 +68,20 @@
                                             <td><?= $siswa["nama"]; ?></td>
                                             <td><?= $siswa["alamat"]; ?></td>
                                             <td><?= $siswa["kelas"]; ?></td>
+                                            <td><?= $siswa["jurusan"]; ?></td>
                                             <td>
                                                 <img style="width: 100px;" src="../asset/img/siswa/<?= $siswa["photo"]; ?>" alt="ini foto">
                                             </td>
                                             <td style="margin: auto;">
-                                                <a href="" class="btn btn-warning btn-sm me-1"><i class="fa-solid fa-pen"></i> Edit</a>
-                                                <a href="" class="btn btn-danger btn-sm me-1"><i class="fa-solid fa-trash"></i> Delete</a>
+                                                <a href="edit.php?id=<?= $siswa["id"]; ?>"  class="btn btn-warning btn-sm me-1"><i class="fa-solid fa-pen"></i> Edit</a>
+                                                
+                                                <a href="delete.php?id=<?= $siswa["id"]; ?>" class="btn btn-danger btn-sm me-1"><i class="fa-solid fa-trash"></i> Delete</a>
                                             </td>
                                         </tr>
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>
-                        </form>
                     </div>
                     <!-- content end -->
 

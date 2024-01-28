@@ -13,6 +13,17 @@
         return $rows;
     }
 
+    // function edit
+    function edit($query) {
+        global $koneksi;
+        $result = mysqli_query($koneksi, $query);
+        $rows = [];
+        while ($siswa = mysqli_fetch_assoc($result)) {
+            $rows[] = $siswa;
+        }
+        return $rows;
+    }
+
     // function upload photo siswa
     function uploadPhotoSiswa() {
         $nameFile = $_FILES["photo"]["name"];
@@ -55,6 +66,7 @@
         $nama = trim(htmlspecialchars($_POST["nama"]));
         $alamat = trim(htmlspecialchars($_POST["alamat"]));
         $kelas = trim(htmlspecialchars($_POST["kelas"]));
+        $jurusan = trim(htmlspecialchars($_POST["jurusan"]));
         $photo = uploadPhotoSiswa();
         if (!$photo) {
             return false;
@@ -70,12 +82,48 @@
 
         
 
-        $query = "INSERT INTO tb_siswa(nis,nama,alamat,kelas,photo) VALUES
-                    ('$nis', '$nama', '$alamat', '$kelas', '$photo')
+        $query = "INSERT INTO tb_siswa(nis,nama,alamat,kelas,jurusan,photo) VALUES
+                    ('$nis', '$nama', '$alamat', '$kelas','$jurusan','$photo')
                     ";
         mysqli_query($koneksi, $query);
         header("location: index.php?msg=success");
         return;
+    }
+
+    // update siswa
+    if (isset($_POST["update"])) {
+
+        $id = $_GET["id"];
+        $nis = trim(htmlspecialchars($_POST["nis"]));
+        $nama = trim(htmlspecialchars($_POST["nama"]));
+        $alamat = trim(htmlspecialchars($_POST["alamat"]));
+        $kelas = trim(htmlspecialchars($_POST["kelas"]));
+        $jurusan = trim(htmlspecialchars($_POST["jurusan"]));
+
+        // cek foto
+        $queryCekPhoto = "SELECT photo FROM tb_siswa WHERE id = $id";
+        $resulPhoto = mysqli_query($koneksi, $queryCekPhoto);
+        $photoData = mysqli_fetch_assoc($resulPhoto);
+
+        if ($_FILES["photo"]["error"] === 4) {
+            $photo = $photoData["photo"];
+        }else {
+            $photo = uploadPhotoSiswa();
+        }
+
+        $query = "UPDATE tb_siswa SET
+                nis = '$nis',
+                nama = '$nama',
+                alamat = '$alamat',
+                kelas = '$kelas',
+                jurusan = '$jurusan',
+                photo = '$photo'
+                WHERE id = $id
+                ";
+        mysqli_query($koneksi, $query);
+        header("location: index.php?msg=success");
+        return;
+        
     }
 
 ?>
