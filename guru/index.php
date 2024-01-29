@@ -28,7 +28,7 @@
 
 ?>
 
-<div id="layoutSidenav_content">
+        <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
                     <ol class="mt-4 breadcrumb mb-4">
@@ -75,7 +75,9 @@
                                             <td style="margin: auto;">
                                                 <a href="edit.php?id=<?= $guru["id"]; ?>"  class="btn btn-warning btn-sm me-1"><i class="fa-solid fa-pen"></i> Edit</a>
                                                 
-                                                <a href="delete.php?id=<?= $guru["id"]; ?>" class="btn btn-danger btn-sm me-1"><i class="fa-solid fa-trash"></i> Delete</a>
+                                                <button type="button" class="btn btn-danger btn-sm me-1" data-bs-toggle="modal" data-bs-target="#mdlHapus" id="btnHapus" title="hapus guru" data-id="<?= $guru["id"]; ?>" data-photo="<?= $guru["photo"]; ?>">
+                                                    <i class="fa-solid fa-trash"></i> Delete
+                                                </button>
                                             </td>
                                         </tr>
                                         <?php endforeach; ?>
@@ -87,5 +89,38 @@
 
                 </div>
             </main>
+        </div>
+
+<!-- modal hapus -->
+    <div class="modal fade " id="mdlHapus" tabindex="-1" >
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Hapus Data</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger text-center" role="alert">
+                    <strong>Apakah anda ingin menghapus data ini?</strong>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <a href="" id="btnMdlHapus" class="btn btn-danger">Hapus data</a>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jquery modal hapus-->
+    <script>
+        $(document).ready(function () {
+            $(document).on("click", "#btnHapus", function () {
+                let idGuru = $(this).data('id');
+                let photoGuru = $(this).data('photo');
+                $('#btnMdlHapus').attr("href","delete.php?id=" + idGuru + "&photo=" + photoGuru);
+            })
+        })
+    </script>
 
 <?php include_once "../view/footer.php" ?>

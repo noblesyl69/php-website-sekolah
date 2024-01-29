@@ -46,6 +46,10 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Guru
                         </a>
+                        <a class="nav-link" href="<?= $url; ?>pelajaran/index.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Pelajaran
+                        </a>
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
