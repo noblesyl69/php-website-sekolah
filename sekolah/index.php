@@ -92,7 +92,8 @@
                                             </td>
                                             <td style="margin: auto;">
                                                 <a href="<?= $url; ?>sekolah/edit.php?id=<?= $sekolah['id']; ?>" class="btn btn-warning btn-sm me-1"><i class="fa-solid fa-pen"></i> Edit</a>
-                                                <a href="<?= $url; ?>sekolah/delete.php?id=<?= $sekolah['id']; ?>" class="btn btn-danger btn-sm me-1"><i class="fa-solid fa-trash"></i> Delete</a>
+
+                                                <button type="button" id="btnHapus" data-id="<?= $sekolah["id"]; ?>" data-gambar="<?= $sekolah["gambar"]; ?>" data-bs-toggle="modal" data-bs-target="#mdlHapus" class="btn btn-danger btn-sm me-1"><i class="fa-solid fa-trash"></i> Delete</button>
                                             </td>
                                         </tr>
                                         <?php endforeach; ?>
@@ -105,6 +106,39 @@
 
                 </div>
             </main>
+        </div>
+        
+<!-- modal hapus -->
+    <div class="modal fade " id="mdlHapus" tabindex="-1" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Hapus Data</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger text-center" role="alert">
+                    <strong>Apakah anda ingin menghapus data ini?</strong>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <a href="" id="btnMdlHapus" class="btn btn-danger">Hapus data</a>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- script jquery hapus data -->
+    <script>
+        $(document).ready(function () {
+            $(document).on("click", "#btnHapus", function () {
+                let idSekolah = $(this).data("id");
+                let gambarSekolah = $(this).data("gambar");
+                $("#btnMdlHapus").attr("href", "delete.php?id="+idSekolah+"&gambar="+gambarSekolah);
+            })
+        })
+    </script>
 
 <?php include_once "../view/footer.php" ?>
         

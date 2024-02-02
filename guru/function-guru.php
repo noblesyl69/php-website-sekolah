@@ -59,6 +59,10 @@
             $photo = $photoData["photo"];
         }else {
             $photo = uploadPhotoGuru();
+            // cek dan delete photo lama
+            if ($photoData["photo"] !== "defauld.jpg") {
+                unlink("../asset/img/guru/". $photoData["photo"]);
+            }
         }
 
         $query = "UPDATE tb_guru SET

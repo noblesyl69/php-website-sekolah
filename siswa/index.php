@@ -90,7 +90,7 @@
         </div>
 
     <!-- modal hapus -->
-    <div class="modal fade" id="mdlHapus" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="mdlHapus" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
         <div class="modal-header">
