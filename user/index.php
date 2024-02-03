@@ -21,7 +21,11 @@
         $msg = '';
     }
 
-    $users = index("SELECT * FROM user");
+    if (isset($_POST["cari"])) {
+        $user = cari($_POST["key"]);
+    }else {
+        $users = index("SELECT * FROM user");
+    }
 
 ?>
 
@@ -35,7 +39,7 @@
                     
                     <!-- content -->
                     <div class="card">
-                        <form action="" method="post">
+                     
                             <div class="card-header mb-2">
                                 <span class="h6"><i class="fa-solid fa-database"></i> Data User</span>
 
@@ -49,38 +53,39 @@
                                 </div>
                             <?php endif; ?>
                             <!-- alert end -->
-                            <div class="card-body">
-                                <table class="table table-hover mt-4" id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">No</th>
-                                            <th scope="col">Username</th>
-                                            <th scope="col">Jabatan</th>
-                                            <th scope="col">Alamat</th>
-                                            <th scope="col">Photo</th>
-                                            <th scope="col" style="width: 170px;" class="text-center">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($users as $user) :?>
-                                        <tr>
-                                            <td>1</td>
-                                            <td><?= $user["username"]; ?></td>
-                                            <td><?= $user["jabatan"]; ?></td>
-                                            <td><?= $user["alamat"]; ?></td>
-                                            <td>
-                                                <img style="width: 100px;" src="../asset/img/user/<?= $user["photo"]; ?>" alt="ini foto">
-                                            </td>
-                                            <td style="margin: auto;">
-                                                <a href="" class="btn btn-warning btn-sm me-1"><i class="fa-solid fa-pen"></i> Edit</a>
-                                                <a href="" class="btn btn-danger btn-sm me-1"><i class="fa-solid fa-trash"></i> Delete</a>
-                                            </td>
-                                        </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
+
+                            <!-- search -->
+                            <div class="col-8 m-auto my-5">
+                                <form action="" method="post" class="d-flex">
+                                    <input class="form-control me-2 col-6" type="search" placeholder="Search User" aria-label="Search" name="key">
+                                    <button class="btn btn-outline-success col-2" type="submit" name="cari">Cari User</button>
+                                </form>
                             </div>
-                        </form>
+                            <!-- search end -->
+
+                            <div class="card-body">
+                                <div class="row col-12 ">
+                                    <?php foreach ($users as $user) :?>
+                                    <div class="card mb-3 col-6">
+                                        <div class="row g-0">
+                                            <div class="col-md-4">
+                                                <img src="<?= $url; ?>asset/img/user/<?= $user["photo"]; ?>" class="img-fluid rounded-start" alt="...">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"><?= $user["nama"]; ?></h5>
+                                                    <p class="card-text"><?= $user["jabatan"]; ?></p>
+                                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                                    
+                                                    <a href="edit.php?id=<?= $user["id"]; ?>" class="btn btn-warning">Edit</a>
+                                                    <a href="#" class="btn btn-danger">delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
                     </div>
                     <!-- content end -->
 

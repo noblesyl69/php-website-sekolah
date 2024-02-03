@@ -50,6 +50,23 @@
         return $rows;
     }
 
+    // function edit
+    function edit($query){
+        global $koneksi;
+        $result = mysqli_query($koneksi, $query);
+        $rows = [];
+        while ($user = mysqli_fetch_assoc($result)) {
+            $rows[]= $user;
+        }
+        return $rows;
+    }
+
+    // function cari
+    function cari($key){
+        $queryCari = "SELECT * FROM user WHERE username LIKE '%$key%'";
+        return index($queryCari);
+    }
+
 
     // function create
     if (isset($_POST["create"])) {
@@ -64,7 +81,6 @@
         if (!$photo) {
             return false;
         }
-       
         // encrip password 
         $password = password_hash($password, PASSWORD_DEFAULT);
 
@@ -82,6 +98,42 @@
         mysqli_query($koneksi, $query);
 
         header("location:index.php?msg=success");
+        return;
+    }
+
+    // update user
+    if (isset($_POST["update"])) {
+        $id = $_GET["id"];
+        $username = htmlspecialchars($_POST["username"]);
+        $nama = htmlspecialchars($_POST["nama"]);
+        $alamat = htmlspecialchars($_POST["alamat"]);
+        $jabatan = htmlspecialchars($_POST["jabatan"]);
+        $password = htmlspecialchars($_POST["password"]);
+
+        // cek photo
+        $cekPhoto = "SELECT photo FROM user WHERE id = $id";
+        $resultPhotoUpdate = mysqli_query($koneksi, $cekPhoto);
+        $photoLama = mysqli_fetch_assoc($resultPhotoUpdate);
+        if ($_FILES["photo"]["error"] === 4) {
+            $photo = $photoLama["photo"];
+        } else {
+            $photo = uploadPhoto();
+        }
+
+        // encrip pasword baru
+        $password = password_hash($password, PASSWORD_DEFAULT);
+
+        $query = "UPDATE user SET
+                    username = '$username',
+                    nama = '$nama',
+                    password = '$password',
+                    alamat = '$alamat',
+                    jabatan = '$jabatan',
+                    photo = '$photo'
+                    WHERE id = $id
+                    ";
+        mysqli_query($koneksi, $query);
+        header("location: index.php?msg=success");
         return;
     }
 

@@ -44,7 +44,7 @@
                             </div>
                             <!-- alert  -->
                             <?php if ($msg === "success") :?>
-                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert" id="alertPhp">
                                     <strong>Selamat</strong> Tambah Data Anda Beshasil!
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
@@ -53,14 +53,14 @@
 
                             <!-- alert delete -->
                             <?php if ($msg === "success-delete") :?>
-                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert" id="alertPhp">
                                     <strong>success</strong> Data Anda Beshasil di delete!
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
                                 
                             <?php endif; ?>
                             <?php if($msg === "error-delete") : ?>
-                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert" id="alertPhp">
                                     <strong>Error</strong> Data Anda Gagal di delete!
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
@@ -132,6 +132,12 @@
     <!-- script jquery hapus data -->
     <script>
         $(document).ready(function () {
+            // funsi alert close
+            setTimeout(function () {
+                $("#alertPhp").fadeOut("slow");
+            }, 2000)
+
+            // funsi hapus
             $(document).on("click", "#btnHapus", function () {
                 let idSekolah = $(this).data("id");
                 let gambarSekolah = $(this).data("gambar");

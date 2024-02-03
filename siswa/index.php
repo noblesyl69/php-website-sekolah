@@ -113,6 +113,13 @@
     <!-- jquery modal hapus -->
     <script>
         $(document).ready(function () {
+
+            // funstion alert close
+            setTimeout(function () {
+                $("#alertPhp").fadeOut("slow");
+            }, 2000)
+
+            // function hapus data
             $(document).on("click", "#btnHapus", function () {
                 let idSiswa = $(this).data("id");
                 let photoSiswa = $(this).data("photo");

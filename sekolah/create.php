@@ -118,6 +118,16 @@
 
                 </div>
             </main>
+        </div>
+
+    <script>
+        $(document).ready(function () {
+            // buat function alert close
+            setTimeout(function () {
+                $("#alertPhp").fadeOut("slow");
+            }, 2000)
+        })
+    </script>
 
 <?php include_once "../view/footer.php" ?>
         
