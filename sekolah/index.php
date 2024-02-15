@@ -137,8 +137,8 @@
                 $("#alertPhp").fadeOut("slow");
             }, 2000)
 
-            // funsi hapus
-            $(document).on("click", "#btnHapus", function () {
+            // funsi tombol hapus
+            $("#btnHapus").on("click", function () {
                 let idSekolah = $(this).data("id");
                 let gambarSekolah = $(this).data("gambar");
                 $("#btnMdlHapus").attr("href", "delete.php?id="+idSekolah+"&gambar="+gambarSekolah);

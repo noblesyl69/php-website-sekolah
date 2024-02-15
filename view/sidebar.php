@@ -50,6 +50,14 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Pelajaran
                         </a>
+                        <a class="nav-link" href="<?= $url; ?>ujian/index.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Ujian
+                        </a>
+                        <a class="nav-link" href="<?= $url; ?>ujian/nilai-ujian.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Nilai Ujian
+                        </a>
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
