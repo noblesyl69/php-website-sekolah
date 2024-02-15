@@ -29,18 +29,18 @@
         $rows[] = $resultSiswa;
     }
 
-    // buat query no ujian automatis
+    // ambil no ujian dari tabel nilai ujian
     $queryNoUjian = mysqli_query($koneksi, "SELECT max(no_ujian) as maxUjian FROM tb_nilai_ujian");
+    // cke query 
     if ($queryNoUjian) {
         $resultNoUjian = mysqli_fetch_assoc($queryNoUjian);
         $maxUjian = $resultNoUjian["maxUjian"];
 
-        $noUjian = (int) substr("maxUjian", 4, 3);
+        $noUjian = (int) substr("$maxUjian", 4, 3);
         $noUjian++;
 
         $maxUjian = "UTS" . sprintf("%03s", $noUjian);
     }
-
 ?>
 
 
@@ -66,6 +66,10 @@
                                     <div class="input-group mb-2">
                                         <span class="input-group-text"><i class="fa-solid fa-rotate fa-sm"></i></span>
                                         <input type="text" name="no_ujian" id="no_ujian" class="form-control bg-transparent" value="<?= $maxUjian; ?>" readonly >
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <span class="input-group-text"><i class="fa-solid fa-calendar-days fa-sm"></i></span>
+                                        <input type="date" name="tgl"  class="form-control" >
                                     </div>
                                     <div class="input-group mb-2">
                                         <span class="input-group-text"><i class="fa-solid fa-user fa-sm"></i></span>
@@ -129,7 +133,7 @@
                                                 <th scope="col">Nilai Ujian</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="kejuruan">
                                         </tbody>
                                     </table>
                                 </div>
@@ -142,6 +146,29 @@
             </main>
         </div>
 
+        <script>
+            // ambil data id jurusan dan id tabel body
+            const jurusan = document.getElementById("jurusan");
+            const matkulPelajaran = document.getElementById("kejuruan");
+
+            // buat event change untuk jurusan
+            jurusan.addEventListener("change", function () {
+                // buat variabel ajax
+                let ajax = new XMLHttpRequest();
+                ajax.onreadystatechange = function () {
+                    // cek status request nya
+                    if (ajax.readyState == 4 && ajax.status == 200) {
+                        // ubah data matkul pelajaran
+                        matkulPelajaran.innerHTML = ajax.responseText;
+                    }
+                }
+
+                // kirim data ke tabel tbody
+                ajax.open("GET", "ajax-mapel.php?jurusan="+jurusan.value, true);
+                ajax.send();
+            });
+        </script>
 
 
 <?php include_once "../view/footer.php" ?>
+
