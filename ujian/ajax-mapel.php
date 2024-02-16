@@ -25,7 +25,7 @@
             <input type="text" name="jurusan[]" value="<?= $row["jurusan"]; ?>" class="border-0 bg-transparent col-12" readonly>
         </td>
         <td>
-            <input type="number" name="nilai[]" value="0" min="0" max="100" step="5" class="form-control nilai ">
+            <input type="number" name="nilai[]" value="0" min="0" max="100" step="5" class="form-control nilai " onclick="fnHitung()">
         </td>
     
     </tr>

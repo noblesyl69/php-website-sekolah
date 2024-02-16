@@ -29,17 +29,16 @@
         $rows[] = $resultSiswa;
     }
 
-    // ambil no ujian dari tabel nilai ujian
+    // ambil data dari tb nilai ujian
     $queryNoUjian = mysqli_query($koneksi, "SELECT max(no_ujian) as maxUjian FROM tb_nilai_ujian");
-    // cke query 
     if ($queryNoUjian) {
         $resultNoUjian = mysqli_fetch_assoc($queryNoUjian);
         $maxUjian = $resultNoUjian["maxUjian"];
 
-        $noUjian = (int) substr("$maxUjian", 4, 3);
-        $noUjian++;
+        $noUrut = (int) substr("$maxUjian", 4, 3);
+        $noUrut++;
 
-        $maxUjian = "UTS" . sprintf("%03s", $noUjian);
+        $maxUjian = "UTS".sprintf("%03s", $noUrut);
     }
 ?>
 
@@ -52,7 +51,9 @@
                     </ol>
                     
                     <!-- content -->
+                <form action="function-ujian.php" method="post">
                     <div class="row">
+                            
                         <div class="col-4">
                             <div class="card">
                                 <div class="card-header mb-2">
@@ -69,7 +70,7 @@
                                     </div>
                                     <div class="input-group mb-2">
                                         <span class="input-group-text"><i class="fa-solid fa-calendar-days fa-sm"></i></span>
-                                        <input type="date" name="tgl"  class="form-control" >
+                                        <input type="date" name="tgl_ujian"  class="form-control" >
                                     </div>
                                     <div class="input-group mb-2">
                                         <span class="input-group-text"><i class="fa-solid fa-user fa-sm"></i></span>
@@ -140,6 +141,7 @@
                             </div>
                         </div>
                     </div>
+                </form>
                     <!-- content end -->
 
                 </div>
@@ -147,26 +149,61 @@
         </div>
 
         <script>
-            // ambil data id jurusan dan id tabel body
-            const jurusan = document.getElementById("jurusan");
-            const matkulPelajaran = document.getElementById("kejuruan");
+            // buat variabel untuk ambil id nya
+            const Jurusan = document.getElementById("jurusan");
+            const mapelJurusan = document.getElementById("kejuruan");
 
-            // buat event change untuk jurusan
-            jurusan.addEventListener("change", function () {
-                // buat variabel ajax
+            // buat event change dari jurusan
+            Jurusan.addEventListener("change", function(){
+                // buat ajax 
                 let ajax = new XMLHttpRequest();
+
                 ajax.onreadystatechange = function () {
-                    // cek status request nya
+                    // cek status 
                     if (ajax.readyState == 4 && ajax.status == 200) {
-                        // ubah data matkul pelajaran
-                        matkulPelajaran.innerHTML = ajax.responseText;
+                        // ubah isi data mapel
+                        mapelJurusan.innerHTML = ajax.responseText;
                     }
                 }
 
-                // kirim data ke tabel tbody
-                ajax.open("GET", "ajax-mapel.php?jurusan="+jurusan.value, true);
+                ajax.open("GET", "ajax-mapel.php?jurusan="+Jurusan.value, true);
                 ajax.send();
             });
+
+            // kita tangkap semua id inpitan yang di atas
+            const total = document.getElementById("total_nilai");
+            const minValue = document.getElementById("nilai_terendah");
+            const maxValue = document.getElementById("nilai_tertinggi");
+            const average = document.getElementById("rata2");
+
+            // buat function
+            function fnHitung() {
+                // buat variabel  dan tangkap id nilai
+                let nilaiUjian = document.getElementsByClassName("nilai");
+                // buat variabel total nilai
+                let totalNilai = 0;
+                let listNilai = [];
+
+                // kita buat perulangan for
+                for (let i = 0; i < nilaiUjian.length; i++) {
+                    // ubah format total nilai menjadi integer dan hitung dengan nilai ujian
+                    totalNilai = parseInt(totalNilai) + parseInt(nilaiUjian[i].value);
+                    // kita masukkan nilai inputan dari user
+                    total.value = totalNilai;
+                    listNilai.push(nilaiUjian[i].value);
+                    // kita urutkan list nilai nya dari besar ke yng kecil
+                    listNilai.sort(function (a,b) {
+                        return a-b;
+                    });
+
+                    // kita ambil nilai yang terkecil ke yng besar
+                    minValue.value = listNilai[0];
+                    maxValue.value = listNilai[nilaiUjian.length - 1];
+                    average.value = Math.round(totalNilai / listNilai.length); 
+                    
+                }
+            }
+            
         </script>
 
 
