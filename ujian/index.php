@@ -73,10 +73,10 @@
                                             <td><?= $ujian["hasil_ujian"]; ?></td>
                                             
                                             <td style="margin: auto;">
-                                                <a href="edit.php?id=<?= $ujian["id"]; ?>"  class="btn btn-warning btn-sm me-1"><i class="fa-solid fa-pen"></i> Edit</a>
-                                                
-                                                <button type="button" id="btnHapus" class="btn btn-danger btn-sm me-1" data-bs-toggle="modal" data-bs-target="#mdlHapus" data-id="<?= $ujian["id"]; ?>" data-photo="<?= $ujian["photo"]; ?>"><i class="fa-solid fa-trash"></i> Delete</button>
+                                                <button type="button" id="btnHapus" class="btn btn-danger btn-sm me-1" data-bs-toggle="modal" data-bs-target="#mdlHapus" data-id="<?= $ujian["id"]; ?>" ><i class="fa-solid fa-trash"></i> Delete</button>
                                             </td>
+
+                                            
                                         </tr>
                                         <?php endforeach; ?>
                                     </tbody>
@@ -90,5 +90,43 @@
         </div>
 
 
+<!-- modal hapus -->
+<div class="modal fade " id="mdlHapus" tabindex="-1" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Hapus Data</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger text-center" role="alert">
+                    <strong>Apakah anda ingin menghapus data ini?</strong>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <a href="" id="btnMdlHapus" class="btn btn-danger">Hapus data</a>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+
+            setTimeout(() => {
+                $("#success").fadeOut();
+            }, 2000);
+
+            setTimeout(() => {
+                $("#cekNamaMapel").fadeOut();
+            }, 2000);
+
+            $("#btnHapus").click(function () {
+                let idUjian = $(this).data('id');
+                $("#btnMdlHapus").attr("href", "delete.php?id="+idUjian);
+            })
+        })
+    </script>
 
 <?php include_once "../view/footer.php" ?>

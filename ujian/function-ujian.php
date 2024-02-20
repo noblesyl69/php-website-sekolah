@@ -13,8 +13,8 @@
         return $rows;
     }
 
-    // create data tb nilai ujian dan tb ujian
-    if (isset($_POST["simpan"])) {
+     // create data tb nilai ujian dan tb ujian
+     if (isset($_POST["simpan"])) {
         $noUjian = htmlspecialchars($_POST["no_ujian"]);
         $tglUjian = htmlspecialchars($_POST["tgl_ujian"]);
         $nis = htmlspecialchars($_POST["nis"]);
@@ -50,6 +50,8 @@
                                     ";
             mysqli_query($koneksi, $queryNilaiUjian);
         }
+
+        header("location: index.php?msg=success");
     }
 
 ?>
