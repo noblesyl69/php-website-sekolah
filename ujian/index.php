@@ -41,7 +41,11 @@
                             <div class="card-header mb-2">
                                 <span class="h6"><i class="fa-solid fa-database"></i> Data Ujian</span>
 
+                                
+
                                 <a href="create.php" name="submit" class="btn btn-primary float-end btn-sm me-1"><i class="fa-solid fa-square-plus"></i> Tambah Ujian</a>
+
+                                <button type="button" class="btn btn-primary float-end btn-sm me-1" onclick="cetak()"><i class="fa-solid fa-print"></i> Cetak</button>
                             </div>
                             <!-- alert  -->
                             <?php include_once "alert.php" ?>
@@ -70,7 +74,13 @@
                                             <td><?= $ujian["nilai_terendah"]; ?></td>
                                             <td><?= $ujian["nilai_tertinggi"]; ?></td>
                                             <td><?= $ujian["nilai_rata"]; ?></td>
-                                            <td><?= $ujian["hasil_ujian"]; ?></td>
+                                            <td>
+                                                <?php if ($ujian["hasil_ujian"] === "LULUS") :?> 
+                                                    <button class="btn btn-success btn-sm col-10 fw-bold text-uppercase"><?= $ujian["hasil_ujian"]; ?></button> 
+                                                <?php else :?>
+                                                    <button class="btn btn-danger btn-sm col-10 fw-bold text-uppercase"><?= $ujian["hasil_ujian"]; ?></button> 
+                                                <?php endif; ?>
+                                            </td>
                                             
                                             <td style="margin: auto;">
                                                 <button type="button" id="btnHapus" class="btn btn-danger btn-sm me-1" data-bs-toggle="modal" data-bs-target="#mdlHapus" data-id="<?= $ujian["id"]; ?>" ><i class="fa-solid fa-trash"></i> Delete</button>
@@ -127,6 +137,12 @@
                 $("#btnMdlHapus").attr("href", "delete.php?id="+idUjian);
             })
         })
+
+        // buat function cetak
+
+        function cetak() {
+            const myWindows = window.open("../raport/raport-ujian.php", "", "width=900,height=600,left=100");
+        }
     </script>
 
 <?php include_once "../view/footer.php" ?>
